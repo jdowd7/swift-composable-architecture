@@ -1,6 +1,12 @@
 import ComposableArchitecture
 import SwiftUI
 
+private let readMe = """
+  This application demonstrates live-searching with the Composable Architecture. As you type the \
+  events are debounced for 300ms, and when you stop typing an API request is made to load \
+  locations. Then tapping on a location will load weather.
+  """
+
 // MARK: - Search feature view
 
 struct SearchView: View {
@@ -30,7 +36,10 @@ struct SearchView: View {
           List {
             ForEach(viewStore.locations, id: \.id) { location in
               VStack(alignment: .leading) {
-                Button(action: { viewStore.send(.locationTapped(location)) }) {
+                Button(action: {
+                  viewStore.send(.locationTapped(location))
+                })
+                {
                   HStack {
                     Text(location.title)
 
